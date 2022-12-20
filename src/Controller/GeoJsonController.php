@@ -12,8 +12,7 @@ class GeoJsonController extends AbstractController
 {
 
     /**
-     * @Route("/geojson", name="geojson")
-     * @Method("GET")
+     * @Route("/geojson", name="geojson", methods={"GET"})
      */
     public function get_geojson(ManagerRegistry $doctrine): Response
     {
@@ -30,8 +29,7 @@ class GeoJsonController extends AbstractController
     }
 
     /**
-     * @Route("/geojson", name="geojson")
-     * @Method("PUT")
+     * @Route("/geojson", name="geojson", methods={"PUT"})
      */
     public function put_geojson(ManagerRegistry $doctrine): Response
     {
