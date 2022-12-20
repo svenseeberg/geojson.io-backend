@@ -12,7 +12,7 @@ class GeoJsonController extends AbstractController
 {
 
     /**
-     * @Route("/geojson", name="geojson", methods={"GET"})
+     * @Route("/geojson/{id}", name="geojson")
      */
     public function get_geojson(ManagerRegistry $doctrine): Response
     {
@@ -23,24 +23,6 @@ class GeoJsonController extends AbstractController
         $response = new Response();
         $response->setContent(json_encode([
             'data' => 123,
-        ]));
-        $response->headers->set('Content-Type', 'application/json');
-        return $response;
-    }
-
-    /**
-     * @Route("/geojson", name="geojson", methods={"PUT"})
-     */
-    public function put_geojson(ManagerRegistry $doctrine): Response
-    {
-        $entityManager = $doctrine->getManager();
-
-        $geojson = new GeoJSON();
-
-        $response = new Response();
-        $response->setContent(json_encode([
-          'data' => 123,
-          'PUT' => 1
         ]));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
