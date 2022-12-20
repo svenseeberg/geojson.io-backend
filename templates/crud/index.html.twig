@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GeoJSON index{% endblock %}
+
+{% block body %}
+    <h1>GeoJSON index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Geojson</th>
+                <th>Wkt</th>
+                <th>Related_object</th>
+                <th>Last_changed</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for geo_j_s_o_n in geo_j_s_o_ns %}
+            <tr>
+                <td>{{ geo_j_s_o_n.id }}</td>
+                <td>{{ geo_j_s_o_n.geojson }}</td>
+                <td>{{ geo_j_s_o_n.wkt }}</td>
+                <td>{{ geo_j_s_o_n.relatedObject }}</td>
+                <td>{{ geo_j_s_o_n.lastChanged ? geo_j_s_o_n.lastChanged|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_crud_show', {'id': geo_j_s_o_n.id}) }}">show</a>
+                    <a href="{{ path('app_crud_edit', {'id': geo_j_s_o_n.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_crud_new') }}">Create new</a>
+{% endblock %}
