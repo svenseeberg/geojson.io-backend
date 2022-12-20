@@ -5,6 +5,7 @@ use App\Entity\GeoJson;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class GeoJsonController extends AbstractController
 {
@@ -13,7 +14,7 @@ class GeoJsonController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
 
-        $product = new GeoJson();
+        $geojson = new GeoJson();
 
         $response = new Response();
         $response->setContent(json_encode([
@@ -27,7 +28,7 @@ class GeoJsonController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
 
-        $product = new GeoJson();
+        $geojson = new GeoJson();
 
         $response = new Response();
         $response->setContent(json_encode([
@@ -41,7 +42,7 @@ class GeoJsonController extends AbstractController
     {
         $entityManager = $doctrine->getManager();
 
-        $product = new GeoJson();
+        $geojson = new GeoJson();
 
         $response = new Response();
         $response->setContent(json_encode([
