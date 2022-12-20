@@ -9,9 +9,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class GeoJsonController extends AbstractController
 {
+
     /**
-    * @Route("/geojson", name="geojson")
-    */
+     * @Route("/geojson", name="geojson")
+     * @Method("GET")
+     */
     public function get_geojson(ManagerRegistry $doctrine): Response
     {
         $entityManager = $doctrine->getManager();
@@ -21,6 +23,25 @@ class GeoJsonController extends AbstractController
         $response = new Response();
         $response->setContent(json_encode([
             'data' => 123,
+        ]));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    /**
+     * @Route("/geojson", name="geojson")
+     * @Method("PUT")
+     */
+    public function put_geojson(ManagerRegistry $doctrine): Response
+    {
+        $entityManager = $doctrine->getManager();
+
+        $geojson = new GeoJSON();
+
+        $response = new Response();
+        $response->setContent(json_encode([
+          'data' => 123,
+          'PUT' => 1
         ]));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
