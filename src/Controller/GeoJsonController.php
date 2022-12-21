@@ -2,10 +2,11 @@
 namespace App\Controller;
 
 use App\Entity\GeoJSON;
+use App\Repository\GeoJSONRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Annotation\Method;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class GeoJsonController extends AbstractController
@@ -14,25 +15,23 @@ class GeoJsonController extends AbstractController
     /**
      * @Route("/geojson/{id}", name="geojson")
      */
-    public function get_geojson(GeoJSON $geojson): JsonResponse
+    public function geojson(Request $request, GeoJSON $geojson, GeoJSONRepository $geoJSONRepository): JsonResponse
     {
+        if ($request->isMethod('put') || $request->isMethod('post')) {
+            $payload = json_decode($request->getContent(), true);
+            $geojson->lastChanged = date('c', time());;
+            $geojson->wkt = $payload["wkt"];
+            $geojson->geojson = $payload["geojson"];
+            $geoJSONRepository->add($geojson, true);
+        }
         return $this->json($geojson);
     }
 
     /**
     * @Route("/", name="listgeojson")
     */
-    public function list_geojson(ManagerRegistry $doctrine): Response
+    public function list_geojson(Request $request): JsonResponse
     {
-        $entityManager = $doctrine->getManager();
-
-        $geojson = new GeoJSON();
-
-        $response = new Response();
-        $response->setContent(json_encode([
-            'data' => 123,
-        ]));
-        $response->headers->set('Content-Type', 'application/json');
-        return $response;
+        return $this->json($geoJSONRepository->findAll());
     }
 }
