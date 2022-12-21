@@ -28,9 +28,9 @@ class GeoJsonController extends AbstractController
     }
 
     /**
-    * @Route("/", name="listgeojson")
+    * @Route("/geojson", name="listgeojson")
     */
-    public function list_geojson(Request $request): JsonResponse
+    public function list_geojson(Request $request, GeoJSONRepository $geoJSONRepository): JsonResponse
     {
         return $this->json($geoJSONRepository->findAll());
     }
