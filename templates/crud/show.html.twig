@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GeoJSON{% endblock %}
+
+{% block body %}
+    <h1>GeoJSON</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ geo_j_s_o_n.id }}</td>
+            </tr>
+            <tr>
+                <th>Geojson</th>
+                <td>{{ geo_j_s_o_n.geojson }}</td>
+            </tr>
+            <tr>
+                <th>Wkt</th>
+                <td>{{ geo_j_s_o_n.wkt }}</td>
+            </tr>
+            <tr>
+                <th>Related_object</th>
+                <td>{{ geo_j_s_o_n.relatedObject }}</td>
+            </tr>
+            <tr>
+                <th>Last_changed</th>
+                <td>{{ geo_j_s_o_n.lastChanged ? geo_j_s_o_n.lastChanged|date('Y-m-d') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_crud_index') }}">back to list</a>
+
+    <a href="{{ path('app_crud_edit', {'id': geo_j_s_o_n.id}) }}">edit</a>
+
+    {{ include('crud/_delete_form.html.twig') }}
+{% endblock %}
