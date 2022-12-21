@@ -18,7 +18,7 @@ class GeoJsonController extends AbstractController
     public function geojson(Request $request, GeoJSON $geojson, GeoJSONRepository $geoJSONRepository): JsonResponse
     {
         if ($request->isMethod('put') || $request->isMethod('post')) {
-            $entityManager = $doctrine->getManager();
+            $entityManager = $this->getDoctrine()->getManager();
             $payload = json_decode($request->getContent(), true);
             $geojson->setLastChanged(new \DateTime('now'));
             $geojson->setWkt($payload["wkt"]);
@@ -29,8 +29,8 @@ class GeoJsonController extends AbstractController
     }
 
     /**
-    * @Route("/geojson/", name="listgeojson")
-    */
+     * @Route("/geojson/", name="listgeojson")
+     */
     public function list_geojson(Request $request, GeoJSONRepository $geoJSONRepository): JsonResponse
     {
         return $this->json($geoJSONRepository->findAll());
