@@ -37,6 +37,11 @@ class GeoJSON
      */
     private $last_changed;
 
+    /**
+     * @ORM\Column(type="string", length=1024, nullable=true)
+     */
+    private $url;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class GeoJSON
     public function setLastChanged(\DateTimeInterface $last_changed): self
     {
         $this->last_changed = $last_changed;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(?string $url): self
+    {
+        $this->url = $url;
 
         return $this;
     }

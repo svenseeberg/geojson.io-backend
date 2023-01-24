@@ -16,6 +16,7 @@ class GeoJSONType extends AbstractType
             ->add('wkt')
             ->add('related_object')
             ->add('last_changed')
+            ->add('url')
         ;
     }
 
